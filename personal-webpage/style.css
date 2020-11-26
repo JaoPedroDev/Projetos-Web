@@ -1,0 +1,29 @@
+/* Reseta as margens padrão dos navegadores */
+body{
+    padding: 0;
+    margin: 0;
+}
+/* Colore e aumenta a barra de navegação */
+.topnav{
+    background-color: rgb(86, 220, 253);
+    height: 40px;
+    overflow: hidden;
+}
+/* Estilisa os links da barra de naevgação */
+.topnav a{
+    float: left;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+/* Quando o mouse passa em cima de um link seu fundo muda de cor */
+.topnav a:hover{
+    background-color: rgb(243, 130, 152);
+    color: black;
+}
+/* Muda a cor de fundo do link da pagina que o usuário se encontra */
+.topnav a.active{
+    background-color: red;
+    color: white;
+}
