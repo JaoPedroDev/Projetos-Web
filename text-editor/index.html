@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de texto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Editor de texto</h1>
+    <div>
+        <input type="button" value="B" class="buttons" id="bold" 
+        onclick="document.execCommand('bold',false,null);">
+        <input type="button" value="I" class="buttons" id="italic" 
+        onclick="document.execCommand('italic',false,null);">
+    </div>
+    <div contenteditable="true" class="textinput">
+        a
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+.buttons{
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+#bold{
+    font-weight: bold;
+}
+#italic{
+    font-style: italic;
+    font-family: 'Times New Roman';
+}
+.textinput{
+    border-style: solid;
+    width: 500px;
+    height: 150px;
+}
