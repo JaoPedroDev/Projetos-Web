@@ -1,4 +1,4 @@
-var tmp //Variável tempo publica para as funções iniciar e pausar
+let tmp //Variável tempo publica para as funções iniciar e pausar
 var pos = 0 //Variável posição para determinar qual objeto da Array "textoSeparado" sera mostrado
 function mostraPalavras(){
     var inputTexto = document.getElementById("texto")
@@ -15,12 +15,20 @@ function separaPalavras(str, separador){//Separa as palavras de um texto usando 
     var arrayDePalavras = str.split(separador)
     return arrayDePalavras
 }
-function iniciar(){//Inicia o intervalo de repetição a função "mostraPalavras"
-    tmp = setInterval(mostraPalavras, 150)
+    var vel;
+function iniciar(){//Inicia o intervalo de repetição da função "mostraPalavras"
+    vel = document.getElementById('vel').value
+    if(vel === ''){
+        vel = 500
+    }
+        tmp = setInterval(mostraPalavras, vel)
 }
 function pausar(){//Pausa o intervalo
     clearInterval(tmp)
 }
 function resetar(){//Reseta a posição da array
     pos = 0
+}
+function change(){
+    alert(tmp)
 }
