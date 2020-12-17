@@ -1,34 +1,38 @@
-let tmp //Variável tempo publica para as funções iniciar e pausar
-var pos = 0 //Variável posição para determinar qual objeto da Array "textoSeparado" sera mostrado
-function mostraPalavras(){
-    var inputTexto = document.getElementById("texto")
-    var visor = document.getElementById("visor")
-    var textoSeparado = separaPalavras(inputTexto.innerText, ' ')//Separa as palavras da div "texto"
-    if(pos < textoSeparado.length){//Testa se o numero da pos é menor que o numero de objetos da array
+var ini = document.getElementById('ini')
+var pau = document.getElementById('pau')
+var res = document.getElementById('res')
+var texto = document.getElementById("texto")
+var visor = document.getElementById("visor")
+var textoSeparado = separaPalavras(texto.innerText, ' ')
+var tmp
+var pos = 0
+function principal(){
+    if(pos < textoSeparado.length){
+        console.log(tmp)
         visor.innerText = textoSeparado[pos]
         pos++
-    }else{//reseta a posição
+    }else{
         pos = 0
     }
 }
-function separaPalavras(str, separador){//Separa as palavras de um texto usando split
-    var arrayDePalavras = str.split(separador)
+//Separa as palavras de um texto usando split
+function separaPalavras(string, separador){
+    var arrayDePalavras = string.split(separador)
     return arrayDePalavras
 }
-    var vel;
-function iniciar(){//Inicia o intervalo de repetição da função "mostraPalavras"
-    vel = document.getElementById('vel').value
-    if(vel === ''){
-        vel = 500
-    }
-        tmp = setInterval(mostraPalavras, vel)
+function iniciar(){
+    tmp = setInterval(principal, 1000)
 }
-function pausar(){//Pausa o intervalo
+function pausar(){
     clearInterval(tmp)
 }
-function resetar(){//Reseta a posição da array
+function resetar(){
     pos = 0
+    visor.innerText = textoSeparado[0]
 }
-function change(){
-    alert(tmp)
+function carregar(){
+    ini.addEventListener("click", iniciar)
+    pau.addEventListener("click", pausar)
+    res.addEventListener("click", resetar)
 }
+window.addEventListener("load", carregar)
