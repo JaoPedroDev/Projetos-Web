@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Leitura rápida</title>
 </head>
 <body>
     <div id="visor">Palavra</div>
-    <div id="texto" contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, minus commodi, officia, dolorem velit cupiditate eligendi asperiores possimus culpa amet magni explicabo illo assumenda ea saepe! Voluptates modi ipsam debitis.</div>
+    <div id="texto" contenteditable="true">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi recusandae quasi placeat consectetur ipsam nam eius cum vitae reiciendis. Vero ut ipsum veniam necessitatibus labore fugit ipsa eius soluta laboriosam?</div>
     <div id="buttons">
-        <input type="button" value="Iniciar" id="ini">
-        <input type="button" value="Pausar" id="pau">
-        <input type="button" value="Resetar" id="res">
-        <input type="number" name="velocidade" id="vel">
+        <input type="button" value="Iniciar" id="ini" class="buttons">
+        <input type="button" value="Pausar" id="pau" class="buttons">
+        <input type="button" value="Resetar" id="res" class="buttons">
+        <input type="number" name="velocidade" id="vel" placeholder="1000">
+        <input type="button" value="Mudar" id="mud" class="buttons">
     </div>
     <script src="script.js"></script>
 </body>
