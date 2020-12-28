@@ -1,7 +1,7 @@
 var texto = document.getElementById("texto")
 var visor = document.getElementById("visor")
 var velocidade = document.getElementById("vel")
-var vel = 1000
+var vel = 1
 var textoSeparado
 var tmp
 var pos = 0
@@ -23,7 +23,7 @@ function separaPalavras(string, separador){
 function iniciar(){
     if(texto.innerText !== ""){
         if(i == 0){
-            tmp = setInterval(principal, vel)
+            tmp = setInterval(principal, vel*1000)
         }
         i = 1
     }
@@ -34,6 +34,7 @@ function pausar(){
 }
 function resetar(){
     pos = 0
+    vel = 1
     visor.innerText = textoSeparado[0]
     i = 0
     clearInterval(tmp)
