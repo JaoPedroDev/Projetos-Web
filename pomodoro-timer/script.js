@@ -39,7 +39,13 @@ function timer(){
         ss = 0
         mm++
         if(mm == 25){
-            pause()
+            reset()
+            Notification.requestPermission(function(status){
+                let n = new Notification(
+                    'Dê uma pausa!', {
+                    body: 'Você está estudando a 25 minutos, dê uma pausa de 5 minutos e reinicie o contador!'
+                })
+            })
         }
     }
 
