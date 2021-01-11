@@ -1,0 +1,16 @@
+body{
+    background-color: #2C3552;
+    color: #B252A1;
+    font-size: 22px;
+    font-family: Arial, monospace;
+    text-align: justify;
+}
+
+a{
+    text-decoration: none;
+    color: #B252A1;
+}
+
+abbr{
+    text-decoration: underline;
+}
