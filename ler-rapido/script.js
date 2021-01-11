@@ -1,7 +1,7 @@
 var texto = document.getElementById("texto")
 var visor = document.getElementById("visor")
 var velocidade = document.getElementById("vel")
-var vel = 1000
+var vel = 200
 var textoSeparado
 var tmp
 var pos = 0
@@ -34,7 +34,7 @@ function pausar(){
 }
 function resetar(){
     pos = 0
-    vel = 1000
+    vel = 200
     velocidade.value = ""
     visor.innerText = textoSeparado[0]
     i = 0

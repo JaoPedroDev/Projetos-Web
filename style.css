@@ -1,4 +1,6 @@
 body{
+    padding: 0px;
+    margin: 30px;
     background-color: #2C3552;
     color: #B252A1;
     font-size: 22px;
@@ -6,11 +8,8 @@ body{
     text-align: justify;
 }
 
-a{
-    text-decoration: none;
-    color: #B252A1;
-}
 
 abbr{
     text-decoration: underline;
+    color: #B252A1;
 }
