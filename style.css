@@ -1,13 +1,12 @@
 body{
     padding: 0px;
-    margin: 30px;
-    background-color: #2C3552;
+    margin: 20px;
     color: #B252A1;
+    background-color: #2c3552;
     font-size: 22px;
     font-family: Arial, monospace;
     text-align: justify;
 }
-
 
 abbr{
     text-decoration: underline;

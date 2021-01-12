@@ -1,16 +1,3 @@
-body{/*Centraliza tudo dinamicamente!*/
-    text-align: center;
-    background-color: #2c3552;
-    color: #b252a1;
-    height: 20em;
-    position: relative;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: 50%;
-    transform: translate(-50%, -50%);
-}
 #visor{
     font-size: 100px;
 }
@@ -21,8 +8,4 @@ body{/*Centraliza tudo dinamicamente!*/
     text-align: justify;
     border: none;
     outline: none;
-}
-.buttons{
-    color: #b252a1;
-    background-color:#2c3552;
 }
