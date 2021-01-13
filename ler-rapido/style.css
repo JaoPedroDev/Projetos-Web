@@ -3,9 +3,9 @@
 }
 #texto{
     height: 150px;
-    width: 500px;
+    width: auto;
     margin: auto;
     text-align: justify;
-    border: none;
+    *border: none;
     outline: none;
 }
