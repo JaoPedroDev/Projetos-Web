@@ -15,7 +15,7 @@ function startPauseSwitch(){
     }
 }
 
-var time = 1 //Velocidade em milissegundos do contador (Padrão = 1000).
+var time = 1000 //Velocidade em milissegundos do contador (Padrão = 1000).
 var counter
 
 // Função que inicia o setInterval na variável "counter" anteriormente declarada.
