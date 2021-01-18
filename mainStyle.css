@@ -51,6 +51,17 @@ abbr{
     transform: translateY(2px);
 }
 
+.txtInput{
+    font-size: 22px;
+    height: 30px;
+    margin: 3px;
+    color: #b252a1;
+    background-color:#2c3552;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.212);
+}
+
 #buttons{
     text-align:center;
 }
