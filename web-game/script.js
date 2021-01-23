@@ -1,5 +1,11 @@
 //Variáveis do jogo
-var canvas, ctx, ALTURA, LARGURA, frames = 0, maxPulos = 3, velocidade = 6,
+var canvas, ctx, ALTURA, LARGURA, frames = 0, maxPulos = 3, velocidade = 6, estadoAtual,
+
+estados = {
+    jogar: 0,
+    jogando: 1,
+    perdeu: 2
+}
 
 chao = {
     y: 550,
@@ -27,9 +33,10 @@ bloco = {
         this.velocidade += this.gravidade;
         this.y += this.velocidade;
 
-        if(this.y > chao.y - this.altura){
+        if(this.y > chao.y - this.altura && estadoAtual != estados.perdeu){
             this.y = chao.y - this.altura;
             this.qntPulos = 0;
+            this.velocidade = 0;
         };
     },
 
@@ -73,12 +80,21 @@ obstaculos = {
             var obs = this._obs[i];
 
             obs.x -= velocidade;
-            if(obs.x <= -obs.largura){
+
+            if(bloco.x < obs.x + obs.largura && bloco.x + bloco.largura >= obs.x && bloco.y + bloco.altura >= chao.y  - obs.altura){
+                estadoAtual = estados.perdeu
+            }
+
+            else if(obs.x <= -obs.largura){
                 this._obs.splice(i, 1);
                 tam--;
                 i--;
             }
         }
+    },
+    
+    limpa: function(){
+        this._obs = [];
     },
 
     desenha: function(){
@@ -91,7 +107,19 @@ obstaculos = {
 }
 
 function clique(evento){
-    bloco.pula();
+    if(estadoAtual == estados.jogando){
+        bloco.pula();
+    }
+    
+    else if(estadoAtual == estados.jogar){
+        estadoAtual = estados.jogando;
+    }
+
+    else if(estadoAtual == estados.perdeu && bloco.y >= 2*ALTURA){
+        estadoAtual = estados.jogar;
+        bloco.velocidade = 0;
+        bloco.y = 0;
+    }
 }
 
 function main(){
@@ -113,6 +141,7 @@ function main(){
 
     document.addEventListener("mousedown", clique);
 
+    estadoAtual = estados.jogar;
     roda();
 }
 
@@ -127,15 +156,35 @@ function atualiza(){
     frames++;
 
     bloco.atualiza();
-    obstaculos.atualiza();
+
+    if(estadoAtual == estados.jogando){
+        obstaculos.atualiza();
+    }
+
+    else if(estadoAtual == estados.perdeu){
+        obstaculos.limpa();
+    }
 }
 
 function desenha(){
     ctx.fillStyle = '#8ebf5e'
     ctx.fillRect(0, 0, LARGURA, ALTURA)
 
+    if(estadoAtual == estados.jogar){
+        ctx.fillStyle = "green";
+        ctx.fillRect(LARGURA/2 - 50, ALTURA/2 - 50, 100, 100)
+    }
+    
+    else if(estadoAtual == estados.perdeu){
+        ctx.fillStyle = "red";
+        ctx.fillRect(LARGURA/2 - 50, ALTURA/2 - 50, 100, 100)
+    }
+
+    else if(estadoAtual == estados.jogando){
+        obstaculos.desenha();
+        
+    }
     chao.desenha();
-    obstaculos.desenha();
     bloco.desenha();
 }
 
