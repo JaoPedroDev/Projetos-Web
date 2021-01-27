@@ -10,7 +10,7 @@ function addOnList(){
     checkbox.type = "checkbox";
     checkbox.id = `cb${n}`;
     checkbox.name = "tdItem";
-
+    
     var label = document.createElement("label");
     label.htmlFor = `cb${n}`;
     label.id = `lb${n}`;
