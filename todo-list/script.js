@@ -27,20 +27,9 @@ function addOnList(){
     n++;
 };
 
-function isChecked(){
-    if(this.checked){
-        console.log("checkbox is checked...");
-    }
-    else{
-        console.log("checkbox is not checked...");
-    };
-};
-
 // EvenListeners
 function main(){
     var addB = document.getElementById("addB");
-    var cbListener = document.getElementById(`cb${n}`)
 
     addB.addEventListener("click", addOnList);
-    cbListener.addEventListener("change", isChecked())
 };
