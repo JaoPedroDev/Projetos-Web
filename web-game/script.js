@@ -152,7 +152,7 @@ function main(){
     canvas = document.createElement("canvas");
     canvas.width = LARGURA;
     canvas.height = ALTURA;
-    canvas.style.border = "1px solid #000";
+    //canvas.style.border = "1px solid #000";
 
     ctx = canvas.getContext("2d")
     document.body.appendChild(canvas);
