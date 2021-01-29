@@ -1,30 +1,24 @@
 var tdList = document.getElementById("tdList");
 var txtInput = document.getElementById("txtInput");
-var n = 1; // Usado para colocar o id de cada item da lista como um numero em ordem crescente começando do 1
+var n = 0; // Usado para colocar o id de cada item da lista como um numero em ordem crescente começando do 1
 
 // Cria um checkbox no HTML para cada item da lista
 function addOnList(){
     //Cria o elemento
-    var checkbox = document.createElement("input");
-    //Adiciona as informações do elemento
-    checkbox.type = "checkbox";
-    checkbox.id = `cb${n}`;
-    checkbox.name = "tdItem";
-    
-    var label = document.createElement("label");
-    label.htmlFor = `cb${n}`;
-    label.id = `lb${n}`;
-    //Adiciona texto dentro do elemento criado
-    label.appendChild(document.createTextNode(txtInput.value));
+    var li = document.createElement("li");
+    li.id = n;
+    //li.onclick = lineThrough(n);
+    li.appendChild(document.createTextNode(txtInput.value));
 
-    var br = document.createElement("br");
-
-    //Adiciona os elementos criados dentro da div "tdList"
-    tdList.appendChild(checkbox);
-    tdList.appendChild(label);
-    tdList.appendChild(br);
+    //Adiciona os elementos criados dentro do ul "tdList"
+    tdList.appendChild(li);
     //Adiciona 1 em "n" para os próximos ids
     n++;
+};
+
+function lineThrough(number){
+    var i = document.getElementById(number);
+    i.style.textDecoration = "line-through";
 };
 
 // EvenListeners
