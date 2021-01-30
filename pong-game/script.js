@@ -1,42 +1,67 @@
-var canvas, ctx, ALTURA, LARGURA, frames = 0, divMain = document.getElementById("main"), estadoAtual,
+var canvas, ctx, ALTURA = 600, LARGURA = 600, frames = 0, divMain = document.getElementById("main"), estadoAtual,
 
+bola = {
+    x: LARGURA/2 - 15,
+    y: ALTURA/2 - 15,
+    largura: 30,
+    altura: 30, 
+    cor: "#a24b92",
+    dirx: -1,
+    diry: 1,
+    mod: 0,
+    velocidade: 50,
+
+    desenha: function(){
+        ctx.fillStyle = this.cor;
+        ctx.fillRect(this.x, this.y, this.largura, this.altura);
+    }
+},
 
 jogador = {
-    x:20,
-    y:30,
-    altura: 60,
-    largura: 20,
-    velocidade: 5,
+    x: 20,
+    y: ALTURA / 2 - 60,
+    altura: 120,
+    largura: 30,
+    velocidade: 10,
     cor: "#a24b92",
-    indoParaBaixo: 0,
-    indoParaCima: 1,
+    mov: 0,
 
     desenha: function(){
         ctx.fillStyle = this.cor;
         ctx.fillRect(this.x, this.y, this.largura, this.altura);
     },
 
-    paraCima: function(){
-        this.y -= this.velocidade
+    movimentacao: function(){
+        if(this.mov == 0){
+            this.y += this.velocidade
+        }else if(this.mov == 1){
+            this.y -= this.velocidade
+        }
     },
+},
 
-    paraBaixo: function(){
-        this.y += this.velocidade
+bot = {
+    x: 550,
+    y: ALTURA / 2 - 60,
+    altura: 120,
+    largura: 30,
+    velocidade: 10,
+    cor: "#a24b92",
+    mov: 0,
+
+    desenha: function(){
+        ctx.fillStyle = this.cor;
+        ctx.fillRect(this.x, this.y, this.largura, this.altura);
     }
 }
 
 function clique(evento){
-    jogador.paraBaixo();
-
-    /*if(estadoAtual == indoParaBaixo){
-        // Fazer o jogador ir pra cima
-        jogador.paraCima();
-        estadoAtual = indoParaCima;
-    }else if(estadoAtual == indoParaCima){
-        // Fazer o jogador ir pra baixo
-        jogador.paraBaixo();
-        estadoAtual = indoParaBaixo;
-    }*/
+    //Altera o movimento do jogador entre para cima ou para baixo
+    if(jogador.mov == 0){
+        jogador.mov = 1;
+    }else if(jogador.mov == 1){
+        jogador.mov = 0;
+    };
 };
 
 function main(){
@@ -77,10 +102,8 @@ function desenha(){
     ctx.fillStyle = "#21283d";
     ctx.fillRect(0, 0, LARGURA, ALTURA);
 
-    ctx.fillStyle = "#b252a1";
-    ctx.fillRect(LARGURA/2 + 3, 0, 3, ALTURA);
-
     jogador.desenha();
+    bot.desenha();
+    bola.desenha();
+    //jogador.movimentacao();
 };
-
-main();
