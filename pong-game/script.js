@@ -1,4 +1,20 @@
-var canvas, ctx, ALTURA = 600, LARGURA = 600, frames = 0, divMain = document.getElementById("main"), estadoAtual,
+var canvas = document.getElementById("cv"), ctx, ALTURA = 600, LARGURA = 600, frames = 0, estadoAtual,
+
+estado = {
+    novoJogo: function(ganhador){
+        if(ganhador == "direita"){
+            direita.score++;
+        }else if(ganhador == "esquerda"){
+            esquerda.score++;
+        };
+
+        esquerda.y = ALTURA / 2 - esquerda.altura / 2;
+        direita.y = ALTURA / 2 - direita.altura / 2;
+        bola.mod = 0;
+        bola.x = LARGURA/2 - 15;
+        bola.y = ALTURA/2 - 15;
+    }
+},
 
 bola = {
     x: LARGURA/2 - 15,
@@ -9,22 +25,7 @@ bola = {
     dirx: -1,
     diry: 1,
     mod: 0,
-    velocidade: 50,
-
-    desenha: function(){
-        ctx.fillStyle = this.cor;
-        ctx.fillRect(this.x, this.y, this.largura, this.altura);
-    }
-},
-
-jogador = {
-    x: 20,
-    y: ALTURA / 2 - 60,
-    altura: 120,
-    largura: 30,
-    velocidade: 10,
-    cor: "#a24b92",
-    mov: 0,
+    velocidade: 5,
 
     desenha: function(){
         ctx.fillStyle = this.cor;
@@ -32,36 +33,112 @@ jogador = {
     },
 
     movimentacao: function(){
-        if(this.mov == 0){
-            this.y += this.velocidade
-        }else if(this.mov == 1){
-            this.y -= this.velocidade
+        if(this.y + this.altura >= esquerda.y && this.y <= esquerda.y + esquerda.altura && this.x <= esquerda.x + esquerda.largura){
+            this.dirx = 1;
+            this.mod += 0.2;
+        }else if(this.y + this.altura >= direita.y && this.y <= direita.y + direita.altura && this.x + this.largura >= direita.x){
+            this.dirx = -1;
+            this.mod += 0.2;
+        };
+
+        if(this.y <= 10){
+            this.diry = 1;
+        }else if(this.y + this.altura >= ALTURA - 10){
+            this.diry = -1;
+        };
+
+        this.x += (this.velocidade + this.mod) * this.dirx;
+        this.y += (this.velocidade + this.mod) * this.diry;
+
+        if(this.x < esquerda.x + esquerda.largura){
+            estado.novoJogo("direita");
+        }else if(this.x + this.largura > direita.x){
+            estado.novoJogo("esquerda");
         }
-    },
+    }
 },
 
-bot = {
-    x: 550,
+esquerda = {
+    x: 20,
     y: ALTURA / 2 - 60,
     altura: 120,
     largura: 30,
-    velocidade: 10,
+    velocidade: 6,
     cor: "#a24b92",
     mov: 0,
+    score: 0,
 
     desenha: function(){
         ctx.fillStyle = this.cor;
         ctx.fillRect(this.x, this.y, this.largura, this.altura);
+    },
+
+    movimentacao: function(){
+        // Adiciona ou subtrai o Y para movimentar o jogador.
+        if(this.mov == 0){
+            this.y += this.velocidade
+        }else if(this.mov == 1){
+            this.y -= this.velocidade
+        };
+
+        // Inverte a direção de movimentação do jogador se bater em uma das paredes de cima ou de baixo.
+        if(this.y < 10){
+            this.mov = 0;
+        }else if(this.y + this.altura > ALTURA - 10){
+            this.mov = 1;
+        };
+    }
+},
+
+direita = {
+    x: 550,
+    y: ALTURA / 2 - 60,
+    altura: 120,
+    largura: 30,
+    velocidade: 6,
+    cor: "#a24b92",
+    mov: 0,
+    score: 0,
+
+    desenha: function(){
+        ctx.fillStyle = this.cor;
+        ctx.fillRect(this.x, this.y, this.largura, this.altura);
+    },
+
+    movimentacao: function(){
+        // Adiciona ou subtrai o Y para movimentar o jogador.
+        if(this.mov == 0){
+            this.y += this.velocidade
+        }else if(this.mov == 1){
+            this.y -= this.velocidade
+        };
+
+        // Inverte a direção de movimentação do jogador se bater em uma das paredes de cima ou de baixo.
+        if(this.y < 10){
+            this.mov = 0;
+        }else if(this.y + this.altura > ALTURA - 10){
+            this.mov = 1;
+        };
     }
 }
 
 function clique(evento){
     //Altera o movimento do jogador entre para cima ou para baixo
-    if(jogador.mov == 0){
-        jogador.mov = 1;
-    }else if(jogador.mov == 1){
-        jogador.mov = 0;
+    if(evento.keyCode == 87){
+        if(esquerda.mov == 0){
+        esquerda.mov = 1;
+        }else if(esquerda.mov == 1){
+        esquerda.mov = 0;
+        };
     };
+
+    if(evento.keyCode == 38){
+        if(direita.mov == 0){
+        direita.mov = 1;
+        }else if(direita.mov == 1){
+        direita.mov = 0;
+        };
+    }
 };
 
 function main(){
@@ -73,37 +150,44 @@ function main(){
         ALTURA = 600;
     }
 
-    canvas = document.createElement("canvas");
     canvas.width = LARGURA;
     canvas.height = ALTURA;
     
     ctx = canvas.getContext("2d");
-    divMain.appendChild(canvas);
-
-    document.addEventListener("mousedown", clique);
-
-    estadoAtual = jogador.indoParaBaixo;
+    
+    document.addEventListener("keydown", clique);
 
     roda();
 }
 
 function roda(){
+    frames++;
     desenha();
+    atualiza();
 
     requestAnimationFrame(roda);
 };
 
 
 function atualiza(){
+    esquerda.movimentacao();
+    direita.movimentacao();
+    bola.movimentacao();
 
 };
 
 function desenha(){
+    // Background
     ctx.fillStyle = "#21283d";
     ctx.fillRect(0, 0, LARGURA, ALTURA);
 
-    jogador.desenha();
-    bot.desenha();
+    // Placar
+    ctx.fillStyle = "#a24b92"
+    ctx.font = "50px Arial";
+    ctx.fillText(esquerda.score, 200, 50);
+    ctx.fillText(direita.score, 377, 50);
+
+    esquerda.desenha();
+    direita.desenha();
     bola.desenha();
-    //jogador.movimentacao();
 };
