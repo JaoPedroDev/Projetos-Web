@@ -8,6 +8,11 @@
     border: none;
     outline: none;
 }
+
+#vel{
+    height: 25px;
+}
+
 @media screen and (min-width: 681px){
     #visor{
         font-size: 100px;
