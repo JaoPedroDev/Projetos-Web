@@ -1,11 +1,11 @@
-var canvas = document.getElementById("cv"), ctx, ALTURA = 600, LARGURA = 600, frames = 0, estadoAtual,
+var canvas = document.getElementById("cv"), ctx, ALTURA = 600, LARGURA = 600, frames = 0, estadoAtual, bi = 0,
 
 estado = {
     novoJogo: function(ganhador){
         if(ganhador == "direita"){
-            direita.score++;
+            ++direita.score;
         }else if(ganhador == "esquerda"){
-            esquerda.score++;
+            ++esquerda.score;
         };
 
         esquerda.y = ALTURA / 2 - esquerda.altura / 2;
@@ -25,7 +25,7 @@ bola = {
     dirx: -1,
     diry: 1,
     mod: 0,
-    velocidade: 5,
+    velocidade: 6,
 
     desenha: function(){
         ctx.fillStyle = this.cor;
@@ -35,10 +35,10 @@ bola = {
     movimentacao: function(){
         if(this.y + this.altura >= esquerda.y && this.y <= esquerda.y + esquerda.altura && this.x <= esquerda.x + esquerda.largura){
             this.dirx = 1;
-            this.mod += 0.2;
+            this.mod += 0.1;
         }else if(this.y + this.altura >= direita.y && this.y <= direita.y + direita.altura && this.x + this.largura >= direita.x){
             this.dirx = -1;
-            this.mod += 0.2;
+            this.mod += 0.1;
         };
 
         if(this.y <= 10){
@@ -50,9 +50,9 @@ bola = {
         this.x += (this.velocidade + this.mod) * this.dirx;
         this.y += (this.velocidade + this.mod) * this.diry;
 
-        if(this.x < esquerda.x + esquerda.largura){
+        if(this.x < esquerda.x){
             estado.novoJogo("direita");
-        }else if(this.x + this.largura > direita.x){
+        }else if(this.x + this.largura > direita.x + direita.largura){
             estado.novoJogo("esquerda");
         }
     }
@@ -97,7 +97,7 @@ direita = {
     largura: 30,
     velocidade: 6,
     cor: "#a24b92",
-    mov: 0,
+    mov: 1,
     score: 0,
 
     desenha: function(){
@@ -119,6 +119,14 @@ direita = {
         }else if(this.y + this.altura > ALTURA - 10){
             this.mov = 1;
         };
+    },
+
+    botAI: function(){
+        if(bola.y + bola.altura/2 > this.y + this.altura/2){
+            this.mov = 0;
+        }else if(bola.y + bola.altura/2 < this.y + this.altura/2){
+            this.mov = 1;
+        }
     }
 }
 
@@ -170,10 +178,15 @@ function roda(){
 
 
 function atualiza(){
+    if(bi == 10){
+        direita.botAI();
+        bi = 0;
+    }else{
+        bi++;
+    }
     esquerda.movimentacao();
     direita.movimentacao();
     bola.movimentacao();
-
 };
 
 function desenha(){
