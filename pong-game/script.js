@@ -159,6 +159,14 @@ function clique(evento){
     }
 };
 
+function cliqueTouch(){
+    if(esquerda.mov == 0){
+        esquerda.mov = 1;
+        }else if(esquerda.mov == 1){
+        esquerda.mov = 0;
+        };
+};
+
 function main(){
     canvas.width = LARGURA;
     canvas.height = ALTURA;
@@ -166,7 +174,7 @@ function main(){
     ctx = canvas.getContext("2d");
     
     document.addEventListener("keydown", clique);
-    document.addEventListener("touchend", clique(keyCode = 87));
+    document.addEventListener("touchstart", cliqueTouch);
 
     roda();
 }
