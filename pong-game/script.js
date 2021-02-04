@@ -13,6 +13,8 @@ estado = {
         bola.mod = 0;
         bola.x = LARGURA/2 - 15;
         bola.y = ALTURA/2 - 15;
+        bola.dirx = Math.random() < 0.5 ? 1: -1;
+        bola.diry = Math.random() < 0.5 ? 1: -1;
     }
 },
 
@@ -22,10 +24,10 @@ bola = {
     largura: 30,
     altura: 30, 
     cor: "#a24b92",
-    dirx: -1,
-    diry: 1,
+    dirx: Math.random() < 0.5 ? 1: -1,
+    diry: Math.random() < 0.5 ? 1: -1,
     mod: 0,
-    velocidade: 6,
+    velocidade: 5,
 
     desenha: function(){
         ctx.fillStyle = this.cor;
@@ -87,6 +89,14 @@ esquerda = {
         }else if(this.y + this.altura > ALTURA - 10){
             this.mov = 1;
         };
+    },
+
+    botAI: function(){
+        if(bola.y + bola.altura/2 > this.y + this.altura){
+            this.mov = 0;
+        }else if(bola.y + bola.altura/2 < this.y){
+            this.mov = 1;
+        }
     }
 },
 
@@ -97,7 +107,7 @@ direita = {
     largura: 30,
     velocidade: 6,
     cor: "#a24b92",
-    mov: 1,
+    mov: 2,
     score: 0,
 
     desenha: function(){
@@ -122,9 +132,9 @@ direita = {
     },
 
     botAI: function(){
-        if(bola.y + bola.altura/2 > this.y + this.altura/2){
+        if(bola.y + bola.altura/2 > this.y + this.altura){
             this.mov = 0;
-        }else if(bola.y + bola.altura/2 < this.y + this.altura/2){
+        }else if(bola.y + bola.altura/2 < this.y){
             this.mov = 1;
         }
     }
@@ -164,6 +174,7 @@ function main(){
     ctx = canvas.getContext("2d");
     
     document.addEventListener("keydown", clique);
+    document.addEventListener("touchend", clique(keyCode = 87));
 
     roda();
 }
@@ -178,7 +189,7 @@ function roda(){
 
 
 function atualiza(){
-    if(bi == 10){
+    if(bi == 0){
         direita.botAI();
         bi = 0;
     }else{
