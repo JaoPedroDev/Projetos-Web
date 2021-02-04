@@ -8,7 +8,6 @@ body{
     text-align: justify;
 }
 
-abbr{
-    text-decoration: underline;
+a{
     color: #B252A1;
 }

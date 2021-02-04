@@ -160,14 +160,6 @@ function clique(evento){
 };
 
 function main(){
-    ALTURA = window.innerHeight;
-    LARGURA = window.innerWidth;
-
-    if(LARGURA >= 500){
-        LARGURA = 600;
-        ALTURA = 600;
-    }
-
     canvas.width = LARGURA;
     canvas.height = ALTURA;
     
