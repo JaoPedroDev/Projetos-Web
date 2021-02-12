@@ -27,7 +27,7 @@ bola = {
     dirx: Math.random() < 0.5 ? 1: -1,
     diry: Math.random() < 0.5 ? 1: -1,
     mod: 0,
-    velocidade: 5,
+    velocidade: 3,
 
     desenha: function(){
         ctx.fillStyle = this.cor;
@@ -37,10 +37,10 @@ bola = {
     movimentacao: function(){
         if(this.y + this.altura >= esquerda.y && this.y <= esquerda.y + esquerda.altura && this.x <= esquerda.x + esquerda.largura){
             this.dirx = 1;
-            this.mod += 0.1;
+            this.mod += 0.2;
         }else if(this.y + this.altura >= direita.y && this.y <= direita.y + direita.altura && this.x + this.largura >= direita.x){
             this.dirx = -1;
-            this.mod += 0.1;
+            this.mod += 0.2;
         };
 
         if(this.y <= 10){
@@ -168,6 +168,7 @@ function cliqueTouch(){
 };
 
 function main(){
+
     canvas.width = LARGURA;
     canvas.height = ALTURA;
     
@@ -189,7 +190,7 @@ function roda(){
 
 
 function atualiza(){
-    if(bi == 0){
+    if(bi == 15){
         direita.botAI();
         bi = 0;
     }else{
