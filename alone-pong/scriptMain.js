@@ -1,7 +1,7 @@
 // Nomear o jogo
 var GAME = {
-    LARGURA: 640,
-    ALTURA: 960,
+    LARGURA: 320,
+    ALTURA: 480,
 
     // Declarar algumas variáveis
     RATIO: null,

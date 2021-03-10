@@ -1,4 +1,4 @@
-// Nomear o jogo
+// Objeto com as propriedades fundamentais do jogo
 var GAME = {
     LARGURA: 320,
     ALTURA: 480,
